@@ -1,0 +1,20 @@
+* {
+  scrollbar-width: thin;
+}
+
+:root {
+  interpolate-size: allow-keywords;
+  scrollbar-gutter: stable;
+  min-width: 768px;
+}
+
+::details-content {
+  content-visibility: visible;
+  height: 0;
+  transition: 0.35s;
+  overflow: hidden;
+}
+
+details[open]::details-content {
+  height: auto;
+}
