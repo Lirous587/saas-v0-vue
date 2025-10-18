@@ -1,24 +1,26 @@
 import request from '@/request'
 
-export interface LoginRes {
+//#region 登录
+export interface LoginResponse {
   access_token: string
   refresh_token: string
 }
 
-// api/user/auth/github
-export const githubLogin = (code: string) => {
-  return request.post<LoginRes>('/api/v1/user/auth/github', {
+export const GithubLogin = (code: string) => {
+  return request.post<LoginResponse>('/v1/user/auth/github', {
     code: code,
   })
 }
+//#endregion
 
-export const validateAuth = () => {
-  return request.post('/api/v1/user/auth')
+//#region 身份验证
+export const ValidateAuth = () => {
+  return request.post('/v1/user/auth')
 }
 
-export const refreshToken = (refreshToken: string) => {
+export const RefreshToken = (refreshToken: string) => {
   return request.post<LoginRes>(
-    '/api/v1/user/refresh_token',
+    '/v1/user/refresh_token',
     {},
     {
       headers: {
@@ -27,3 +29,20 @@ export const refreshToken = (refreshToken: string) => {
     }
   )
 }
+//#endregion
+
+//#region 用户信息
+interface User {
+  avatar_url: string
+  created_at: number
+  email: string
+  email_verified: boolean
+  id: number
+  last_login_at: number
+  updated_at: number
+  username: string
+}
+export const GetProfile = () => {
+  return request.get<User>(`/v1/user/profile`)
+}
+//#endregion

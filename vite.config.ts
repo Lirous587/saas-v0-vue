@@ -28,9 +28,10 @@ export default defineConfig(({ mode }) => {
     },
     server: {
       proxy: {
-        '/api': {
+        '/v1': {
           target: env.VITE_API_PROXY,
-          rewrite: path => path.replace(/^\/api/, ''),
+          // rewrite 以保留 /v1 前缀
+          // rewrite: path => path.replace(/^\/v1/, ''),
           changeOrigin: true,
         },
       },

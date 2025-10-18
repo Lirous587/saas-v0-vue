@@ -1,5 +1,5 @@
 {
-  "name": "vue-scaffold",
+  "name": "saas-v0",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -20,8 +20,8 @@
     "axios": "^1.9.0",
     "axios-auth-refresh": "^3.3.6",
     "cropperjs": "^1.6.2",
-    "daisyui": "^5.1.9",
-    "li-daisy": "^2.5.0",
+    "daisyui": "^5.3.7",
+    "li-daisy": "^2.6.0",
     "md-editor-v3": "^5.8.4",
     "nprogress": "^0.2.0",
     "pinia": "^3.0.1",
