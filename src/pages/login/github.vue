@@ -15,7 +15,7 @@ definePage({
   },
 })
 
-import { githubLogin } from '@/api/user'
+import { GithubLogin } from '@/api/user'
 import {
   setAccessToken,
   setRefreshToken,
@@ -71,7 +71,7 @@ const handleGithubLogin = async () => {
     }
 
     // 3. 后端交互 获取token
-    await githubLogin(code.value as string)
+    await GithubLogin(code.value as string)
       .then(res => {
         setAccessToken(res.data.access_token)
         setRefreshToken(res.data.refresh_token)

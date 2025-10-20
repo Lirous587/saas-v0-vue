@@ -3,12 +3,12 @@ import type { ErrorResponse } from '@/request/response'
 import NProgress from 'nprogress'
 
 import { getAccessToken, removeAccessToken } from './utils/auth'
-import { validateAuth } from './api/user'
+import { ValidateAuth } from './api/user'
 
 // 从路由对象中提取 name 的类型
 type RouteName = RouteLocationNormalized['name']
 const loginRoutes: RouteName[] = ['/login/', '/login/github']
-const publicRoutes: RouteName[] = [...loginRoutes, '/404']
+const publicRoutes: RouteName[] = [...loginRoutes, '/', '/404']
 
 export function setupRouterGuards(router: Router) {
   router.beforeEach(async (to, from, next) => {
@@ -26,7 +26,7 @@ export function setupRouterGuards(router: Router) {
 
     if (token) {
       try {
-        await validateAuth()
+        await ValidateAuth()
         if (loginRoutes.includes(to.name)) {
           next({
             name: '/home',

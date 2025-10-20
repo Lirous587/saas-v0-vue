@@ -5,7 +5,7 @@ import {
   removeAccessToken,
   removeRefreshToken,
 } from '@/utils/auth'
-import { refreshToken } from '@/api/user'
+import { RefreshToken } from '@/api/user'
 import { router } from '@/main'
 
 export async function refreshAccessToken() {
@@ -16,7 +16,7 @@ export async function refreshAccessToken() {
     throw new Error('无刷新令牌')
   }
   try {
-    const res = await refreshToken(rToken)
+    const res = await RefreshToken(rToken)
     const data = res.data
     setAccessToken(data.access_token)
     setRefreshToken(data.refresh_token)

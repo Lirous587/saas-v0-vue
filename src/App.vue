@@ -12,7 +12,7 @@ const layouts = {
 const route = useRoute()
 
 const currentLayout = computed(() => {
-  const layoutName = (route.meta.layout as keyof typeof layouts) || 'admin'
+  const layoutName = (route.meta.layout as keyof typeof layouts) || 'none'
 
   return layouts[layoutName]
 })

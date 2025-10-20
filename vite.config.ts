@@ -35,6 +35,7 @@ export default defineConfig(({ mode }) => {
           changeOrigin: true,
         },
       },
+      // open: '/login',
     },
   }
 })
