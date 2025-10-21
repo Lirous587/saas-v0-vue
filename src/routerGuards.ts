@@ -10,8 +10,16 @@ type RouteName = RouteLocationNormalized['name']
 const loginRoutes: RouteName[] = ['/login/', '/login/github']
 const publicRoutes: RouteName[] = [...loginRoutes, '/', '/404']
 
+NProgress.configure({ showSpinner: false })
+
 export function setupRouterGuards(router: Router) {
   router.beforeEach(async (to, from, next) => {
+    // 只改变锚点 不做处理
+    if (to.path === from.path && to.hash !== from.hash) {
+      next()
+      return
+    }
+
     NProgress.start()
 
     const token = getAccessToken()

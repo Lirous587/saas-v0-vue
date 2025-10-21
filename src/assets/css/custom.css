@@ -6,6 +6,7 @@
   interpolate-size: allow-keywords;
   scrollbar-gutter: stable;
   min-width: 768px;
+  scroll-behavior: smooth;
 }
 
 ::details-content {

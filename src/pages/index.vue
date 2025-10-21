@@ -1,18 +1,5 @@
-<script setup lang="ts">
-import {
-  SparklesIcon,
-  BoltIcon,
-  PlayCircleIcon,
-  PuzzlePieceIcon,
-  CloudIcon,
-  GlobeAltIcon,
-  CheckIcon,
-  CurrencyDollarIcon,
-} from '@heroicons/vue/24/outline'
-</script>
-
 <template>
-  <div>
+  <div class="!scroll-smooth">
     <!-- Navbar -->
     <div
       class="navbar bg-base-100/80 backdrop-blur-md border-b border-base-300 sticky top-0 z-50 shadow-sm px-4"
@@ -20,15 +7,17 @@ import {
       <div class="navbar-start">
         <div class="text-xl font-bold gap-2 cursor-pointer">
           <span class="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent"
-            >SaaS-V0</span
+            >Li-SaaS</span
           >
         </div>
       </div>
-      <div class="navbar-center hidden lg:flex">
+      <div class="navbar-center flex">
         <ul class="menu menu-horizontal px-1 gap-1">
-          <li><a class="rounded-lg hover:bg-base-300">功能</a></li>
-          <li><a class="rounded-lg hover:bg-base-300">定价</a></li>
-          <li><a class="rounded-lg hover:bg-base-300">文档</a></li>
+          <li><a class="btn btn-ghost btn-sm" href="#features">功能</a></li>
+          <li><a class="btn btn-ghost btn-sm" href="#price">定价</a></li>
+          <li>
+            <a class="btn btn-ghost btn-sm" href="https://lirous.com" target="_blank">文档</a>
+          </li>
         </ul>
       </div>
       <div class="navbar-end gap-2">
@@ -44,8 +33,8 @@ import {
     </div>
 
     <!-- Hero Section -->
-    <div
-      class="relative h-screen border-b-2 border-b-base-300 flex flex-col items-center justify-center text-center z-10 space-y-6"
+    <MotionFadeInUp
+      class="relative h-screen border-b border-b-base-300 flex flex-col items-center justify-center text-center space-y-6"
     >
       <!-- 装饰性背景 -->
       <div class="absolute inset-0 opacity-10">
@@ -58,7 +47,7 @@ import {
         <SparklesIcon class="h-5 w-5" />
       </div>
       <h1
-        class="text-5xl lg:text-7xl font-extrabold leading-tight bg-conic from-primary via-info to-secondary bg-clip-text text-transparent"
+        class="text-7xl font-extrabold leading-tight bg-conic from-primary via-info to-secondary bg-clip-text text-transparent"
       >
         <span> 为您的网站 </span>
         <br />
@@ -100,11 +89,11 @@ import {
           <div class="stat-desc text-base-content/50">稳定运行</div>
         </div>
       </div>
-    </div>
+    </MotionFadeInUp>
 
     <!-- How It Works -->
-    <div
-      class="relative h-screen border-b-2 border-b-base-300 flex flex-col items-center justify-center text-center z-10 space-y-6"
+    <MotionFadeInUp
+      class="relative h-screen border-b border-b-base-300 flex flex-col items-center justify-center text-center space-y-6"
     >
       <div class="space-y-4 font-bold">
         <div class="badge badge-secondary badge-lg">
@@ -166,77 +155,53 @@ import {
           </div>
         </div>
       </div>
-    </div>
+    </MotionFadeInUp>
 
     <!-- Features Section -->
-    <div
-      class="relative h-screen border-b-2 border-b-base-300 flex flex-col items-center justify-center text-center z-10 space-y-6"
-    >
-      <div class="text-center space-y-4 font-bold">
-        <div class="badge badge-primary opacity-85 badge-lg">
-          核心优势
-          <CloudIcon class="w-5 h-5" />
-        </div>
-        <h2 class="text-4xl text-primary/80">强大的功能</h2>
-        <p class="text-xl text-info">提供完整的评论管理解决方案</p>
-      </div>
-
-      <div class="grid grid-cols-3 gap-8">
-        <div
-          class="card bg-gradient-to-br from-accent/10 to-accent/5 hover:shadow-xl transition hover:scale-105 border border-accent/20"
-        >
-          <div class="card-body">
-            <div class="w-16 h-16 bg-accent/20 rounded-2xl text-4xl mb-4"></div>
-            <h3 class="card-title text-accent">自定义样式</h3>
-            <p class="text-start text-base-content/70">支持无头样式，美观与否有你决定</p>
-          </div>
-        </div>
-
-        <div
-          class="card bg-gradient-to-br from-info/10 to-info/5 hover:shadow-xl transition-all hover:scale-105 border border-info/20"
-        >
-          <div class="card-body">
-            <div
-              class="w-16 h-16 bg-info/20 rounded-2xl flex items-center justify-center text-4xl mb-4"
-            ></div>
-            <h3 class="card-title text-info">图片支持</h3>
-            <p class="text-start text-base-content/70">
-              集成 Cloudflare R2，支持评论附带图片，表达更丰富
-            </p>
-          </div>
-        </div>
-
-        <div
-          class="card bg-gradient-to-br from-warning/10 to-warning/5 hover:shadow-xl transition-all hover:scale-105 border border-warning/20"
-        >
-          <div class="card-body">
-            <div
-              class="w-16 h-16 bg-warning/20 rounded-2xl flex items-center justify-center text-4xl mb-4"
-            ></div>
-            <h3 class="card-title text-warning">灵活配置</h3>
-            <p class="text-start text-base-content/70">支持租户级和板块级配置，满足不同场景需求</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <!-- Use Cases -->
-    <div
-      class="relative h-screen border-b-2 border-b-base-300 flex flex-col items-center justify-center text-center z-10 space-y-6"
+    <MotionFadeInUp
+      id="features"
+      class="relative min-h-screen border-b border-b-base-300 p-12 grid grid-cols-2 items-center scroll-m-20"
     >
-      <div class="text-center space-y-4 font-bold">
-        <div class="badge badge-secondary badge-lg">
-          应用场景
-          <GlobeAltIcon class="w-5 h-5" />
+      <!-- Features Section -->
+      <div class="space-y-3 flex flex-col">
+        <div class="text-center space-y-4 font-bold">
+          <div class="badge badge-primary opacity-85 badge-lg">
+            核心优势
+            <CloudIcon class="w-5 h-5" />
+          </div>
+          <h2 class="text-4xl text-primary/80">强大的功能</h2>
+          <p class="text-xl text-info">提供完整的评论管理解决方案</p>
         </div>
-        <h2 class="text-4xl text-secondary">适用场景</h2>
-        <p class="text-xl text-secondary/60">适合各类静态网站和内容平台</p>
+        <div class="mx-auto space-x-2">
+          <div class="badge badge-primary">自定义样式</div>
+          <div class="badge badge-secondary">图库支持</div>
+          <div class="badge badge-success">灵活配置</div>
+        </div>
       </div>
-    </div>
+
+      <!-- Use Cases -->
+      <div class="space-y-3 flex flex-col">
+        <div class="text-center space-y-4 font-bold">
+          <div class="badge badge-secondary badge-lg">
+            应用场景
+            <GlobeAltIcon class="w-5 h-5" />
+          </div>
+          <h2 class="text-4xl text-secondary">适用场景</h2>
+          <p class="text-xl text-secondary/60">适合各类静态网站和内容平台</p>
+        </div>
+        <div class="mx-auto space-x-2">
+          <div class="badge badge-primary">博客网站</div>
+          <div class="badge badge-secondary">图像集</div>
+          <div class="badge badge-success">宣传页</div>
+        </div>
+      </div>
+    </MotionFadeInUp>
 
     <!-- Pricing Section -->
-    <div
-      class="relative h-screen border-b-2 border-b-base-300 flex flex-col items-center justify-center text-center z-10 space-y-6"
+    <MotionFadeInUp
+      id="price"
+      class="relative min-h-screen p-12 border-b border-b-base-300 flex flex-col items-center justify-center text-center z-10 space-y-6 scroll-m-20"
     >
       <div class="text-center space-y-4 font-bold mb-10">
         <div class="badge badge-primary opacity-95 badge-lg">
@@ -244,37 +209,30 @@ import {
           <CurrencyDollarIcon class="w-5 h-5" />
         </div>
         <h2 class="text-4xl text-primary/75">选择适合您的方案</h2>
-        <p class="text-xl text-info/90">相信您永远不会为本次抉择所后悔</p>
+        <p class="text-xl text-info/90">服务至上 一分钱一份货</p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+      <div
+        class="grid grid-cols-3 gap-8 *:shadow-xl *:hover:shadow-2xl *:transition-all *:border *:border-base-300 *:px-6 *py-4"
+      >
         <!-- 免费版 -->
-        <div
-          class="card bg-base-100 shadow-xl hover:shadow-2xl transition-all border border-base-300"
-        >
+        <div class="card">
           <div class="card-body">
-            <div class="badge badge-info mb-2">快速体验</div>
+            <div class="badge badge-secondary mb-2">快速体验</div>
             <h3 class="card-title text-3xl mb-2">免费版</h3>
-            <div class="my-6">
-              <span class="text-5xl font-bold">¥0</span>
-              <span class="text-base-content/60">/月</span>
+            <div class="my-3">
+              <span class="text-5xl font-bold">Free</span>
             </div>
-            <ul class="space-y-3 mb-8">
-              <li class="flex items-center gap-3">
-                <CheckIcon class="w-5 h-5" />
-                <span>5 个板块</span>
-              </li>
-              <li class="flex items-center gap-3">
-                <CheckIcon class="w-5 h-5" />
-                <span>1000 条评论/月</span>
-              </li>
-              <li class="flex items-center gap-3">
-                <CheckIcon class="w-5 h-5" />
-                <span>基础功能</span>
-              </li>
+            <ul class="space-y-3 mb-8 features">
+              <li>10用户</li>
+              <li>5 个板块</li>
+              <li>10评论/板块</li>
+              <li class="font-bold">基础功能</li>
             </ul>
             <div class="card-actions">
-              <button class="btn btn-outline btn-block hover:scale-105 transition-transform">
+              <button
+                class="btn btn-secondary btn-outline btn-block hover:scale-105 transition-transform"
+              >
                 开始使用
               </button>
             </div>
@@ -282,231 +240,173 @@ import {
         </div>
 
         <!-- 爱心版 -->
-        <div
-          class="card bg-gradient-to-br from-primary to-secondary text-primary-content shadow-2xl hover:shadow-3xl transition-all scale-105 border-2 border-primary"
-        >
+        <div class="card translate-y-[-10px]">
           <div class="absolute -top-4 left-1/2 -translate-x-1/2">
-            <div class="badge badge-warning gap-2 px-4 py-3">
+            <div class="badge badge-success gap-2 px-4 py-3">
               推荐
               <SparklesIcon class="w-5 h-5" />
             </div>
           </div>
           <div class="card-body">
-            <div class="badge badge-secondary mb-2">生产可用</div>
+            <div class="badge badge-primary mb-2">生产可用</div>
             <h3 class="card-title text-3xl mb-2">爱心版</h3>
-            <div class="my-6">
-              <span class="text-5xl font-bold">¥0</span>
-              <span class="text-base-content/60">/月</span>
+            <div class="my-3">
+              <span class="text-4xl font-bold">仅需star</span>
             </div>
-            <ul class="space-y-3 mb-8">
-              <li class="flex items-center gap-3">
-                <CheckIcon class="w-5 h-5" />
-                <span>无限用户</span>
-              </li>
-              <li class="flex items-center gap-3">
-                <CheckIcon class="w-5 h-5" />
-                <span><strong>无限</strong>板块</span>
-              </li>
-              <li class="flex items-center gap-3">
-                <CheckIcon class="w-5 h-5" />
-                <span>无限评论</span>
-              </li>
-              <li class="flex items-center gap-3">
-                <CheckIcon class="w-5 h-5" />
-                <span>图片上传</span>
-              </li>
-              <li class="flex items-center gap-3">
-                <CheckIcon class="w-5 h-5" />
-                <span>邮件通知</span>
-              </li>
+            <ul class="space-y-3 mb-8 features">
+              <li class="font-bold">无限用户</li>
+              <li>300板块</li>
+              <li>100评论/板块</li>
+              <li class="font-bold">基础功能</li>
             </ul>
             <div class="card-actions">
               <button
-                class="btn btn-secondary btn-block hover:scale-105 transition-transform shadow-lg"
+                class="btn btn-primary btn-block hover:scale-105 transition-transform shadow-lg"
               >
-                点个Star!
+                开始使用
               </button>
             </div>
           </div>
         </div>
 
         <!-- 专业版 -->
-        <div
-          class="card bg-base-100 shadow-xl hover:shadow-2xl transition-all border border-base-300"
-        >
+        <div class="card">
           <div class="card-body">
-            <div class="badge badge-neutral mb-2">企业定制</div>
-            <h3 class="card-title text-3xl mb-2">企业版</h3>
-            <div class="my-6">
-              <span class="text-5xl font-bold">定制</span>
+            <div class="badge badge-neutral mb-2">服务可靠</div>
+            <h3 class="card-title text-3xl mb-2">专业版</h3>
+            <div class="my-3">
+              <span class="text-5xl font-bold">¥5</span>
+              <span class="text-base-content/60">/月</span>
             </div>
-            <ul class="space-y-3 mb-8">
-              <li class="flex items-center gap-3">
-                <CheckIcon class="w-5 h-5" />
-
-                <span><strong>无限</strong>租户</span>
-              </li>
-              <li class="flex items-center gap-3">
-                <CheckIcon class="w-5 h-5" />
-
-                <span><strong>无限</strong>板块</span>
-              </li>
-              <li class="flex items-center gap-3">
-                <CheckIcon class="w-5 h-5" />
-
-                <span><strong>无限</strong>评论</span>
-              </li>
-              <li class="flex items-center gap-3">
-                <CheckIcon class="w-5 h-5" />
-
-                <span>专属支持</span>
-              </li>
-              <li class="flex items-center gap-3">
-                <CheckIcon class="w-5 h-5" />
-
-                <span>SLA 保证</span>
-              </li>
-              <li class="flex items-center gap-3">
-                <CheckIcon class="w-5 h-5" />
-
-                <span>定制开发</span>
-              </li>
+            <ul class="space-y-3 mb-8 features">
+              <li class="font-bold">无限用户</li>
+              <li>1000板块</li>
+              <li>500评论/板块</li>
+              <li class="font-bold">基础功能</li>
             </ul>
             <div class="card-actions">
-              <button class="btn btn-outline btn-block hover:scale-105 transition-transform">
-                联系销售
+              <button
+                class="btn btn-neutral btn-block hover:scale-105 transition-transform shadow-lg"
+              >
+                立即购买
               </button>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </MotionFadeInUp>
 
     <!-- FAQ -->
-    <div class="mx-auto px-4 py-16 bg-base-200/50 rounded-3xl my-16">
-      <div class="text-center mb-16">
-        <div class="badge badge-warning badge-lg mb-4">FAQ</div>
-        <h2 class="text-4xl lg:text-5xl font-bold mb-4">常见问题</h2>
-        <p class="text-xl text-base-content/70">快速了解更多信息</p>
+    <MotionFadeInUp
+      class="relative min-h-screen p-12 border-b border-b-base-300 flex flex-col items-center justify-center text-center z-10 space-y-6"
+    >
+      <div class="text-center mb-12 font-bold">
+        <div class="badge badge-neutral badge-lg mb-4">FAQ</div>
+        <h2 class="text-4xl text-neutral/80 mb-4">常见问题</h2>
+        <p class="text-xl text-neutral/40">快速了解更多信息</p>
       </div>
 
-      <div class="max-w-4xl mx-auto space-y-3">
-        <div class="collapse collapse-plus bg-base-100 shadow-md hover:shadow-lg transition-shadow">
+      <div class="join join-vertical bg-base-100 *:text-start">
+        <div class="collapse collapse-plus bg-base-100 join-item border border-base-300">
           <input type="radio" name="faq-accordion" checked />
           <div class="collapse-title text-xl font-semibold flex items-center gap-3">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6 text-primary"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
+            <QuestionMarkCircleIcon class="h-6 w-6 text-primary" />
             什么是板块(Plate)?
           </div>
           <div class="collapse-content text-base-content/80">
             <p class="leading-relaxed">
-              板块是评论系统的基本组织单位。每个板块对应网站上的一个独立内容单元，比如一篇博客文章、一个图库集或一个产品页面。您需要为每个需要评论功能的页面创建一个板块。通过
-              belong_key 参数，系统会自动匹配对应页面的评论内容。
+              板块是评论系统的基本组织单位
+              <br />
+              每个板块对应网站上的一个独立内容单元，比如一篇博客文章、一个图库集或一个产品页面
+              <br />
+              您需要为每个需要评论功能的页面创建一个板块
+              <br />
+              通过belong_key 参数，系统会自动匹配对应页面的评论内容
             </p>
           </div>
         </div>
-
-        <div class="collapse collapse-plus bg-base-100 shadow-md hover:shadow-lg transition-shadow">
+        <div class="collapse collapse-plus bg-base-100 join-item border border-base-300">
           <input type="radio" name="faq-accordion" />
           <div class="collapse-title text-xl font-semibold flex items-center gap-3">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6 text-secondary"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
-              />
-            </svg>
+            <CodeBracketIcon class="h-6 w-6 text-secondary" />
             如何集成到我的网站?
           </div>
           <div class="collapse-content text-base-content/80">
-            <p class="leading-relaxed">
-              集成非常简单，只需两步：<br />1) 在管理后台创建板块并获取嵌入代码<br />2)
-              将代码复制到您网站的相应位置<br /><br />我们的 JS 库会自动根据页面 URL
-              加载对应的评论内容，无需任何后端开发工作。
-            </p>
+            <div class="leading-relaxed">
+              集成非常简单，只需两步:
+              <ol class="list list-decimal list-inside">
+                <li>在管理后台创建板块并获取嵌入代码</li>
+                <li>将代码复制到您网站的相应位置</li>
+              </ol>
+              我们的 JS 库会自动根据页面 URL 加载对应的评论内容，无需任何后端开发工作
+            </div>
           </div>
         </div>
-
-        <div class="collapse collapse-plus bg-base-100 shadow-md hover:shadow-lg transition-shadow">
+        <div class="collapse collapse-plus bg-base-100 join-item border border-base-300">
           <input type="radio" name="faq-accordion" />
           <div class="collapse-title text-xl font-semibold flex items-center gap-3">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6 text-accent"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"
-              />
-            </svg>
+            <AdjustmentsVerticalIcon class="h-6 w-6 text-accent" />
             支持哪些功能配置?
           </div>
           <div class="collapse-content text-base-content/80">
             <p class="leading-relaxed">
-              系统支持丰富的配置选项：评论审核模式、匿名评论、字数限制、排序方式、敏感词过滤、邮件通知等。您可以在租户级别设置全局配置，也可以为每个板块单独配置，板块配置优先级更高。
+              系统支持丰富的配置选项：评论审核模式、字数限制、排序方式、邮件通知等
+              <br />
+              您可以在租户级别设置全局配置，也可以为每个板块单独配置，板块配置优先级更高
             </p>
           </div>
         </div>
-
-        <div class="collapse collapse-plus bg-base-100 shadow-md hover:shadow-lg transition-shadow">
+        <div class="collapse collapse-plus bg-base-100 join-item border border-base-300">
           <input type="radio" name="faq-accordion" />
           <div class="collapse-title text-xl font-semibold flex items-center gap-3">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6 text-success"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
-              />
-            </svg>
+            <ShieldCheckIcon class="h-6 w-6 text-success" />
             数据安全有保障吗?
           </div>
           <div class="collapse-content text-base-content/80">
             <p class="leading-relaxed">
-              我们非常重视数据安全。采用严格的数据隔离机制，每个租户的数据完全独立。所有数据传输使用
-              HTTPS 加密，并定期进行数据备份。我们还提供敏感词过滤功能，确保评论内容健康合规。
+              <strong> 我们非常重视数据安全 </strong>
+              <br />
+              我们采用严格的数据隔离机制，每个租户的数据完全独立
+              <br />
+              所有数据传输使用 HTTPS加密，并定期进行数据备份
             </p>
           </div>
         </div>
       </div>
-    </div>
+    </MotionFadeInUp>
 
-    <footer class="footer footer-center text-base-content p-6 border-t border-base-content/10">
-      <aside>
-        <p class="text-base-content/70">
-          Copyright © 2025 - SaaS-V0 评论系统托管平台 · 让评论更简单
-        </p>
-      </aside>
+    <footer class="footer footer-center grid-rows-2 gap-1 py-2.5">
+      <p class="text-base-content/80 font-medium">Li-SaaS 评论系统托管平台</p>
+      <p class="p-0 text-base-content/50 text-xs">
+        Copyright © {{ new Date().getFullYear() }} Li-SaaS. All rights reserved.
+      </p>
     </footer>
   </div>
 </template>
+
+<script setup lang="ts">
+import {
+  SparklesIcon,
+  BoltIcon,
+  PlayCircleIcon,
+  PuzzlePieceIcon,
+  CloudIcon,
+  GlobeAltIcon,
+  CurrencyDollarIcon,
+  QuestionMarkCircleIcon,
+  CodeBracketIcon,
+  AdjustmentsVerticalIcon,
+  ShieldCheckIcon,
+} from '@heroicons/vue/24/outline'
+
+import MotionFadeInUp from '@/components/motion/MotionFadeInUp.vue'
+</script>
+
+<style scoped>
+.features {
+  text-align: start;
+}
+.features li::before {
+  content: '✓ ';
+}
+</style>
