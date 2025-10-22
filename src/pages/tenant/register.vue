@@ -67,7 +67,22 @@ const handleSubmit = async () => {
 </script>
 
 <template>
-  <div class="min-h-screen p-12 w-full flex">
+  <div class="min-h-screen p-12 w-full flex relative">
+    <!-- 渐变动画背景 -->
+    <!-- <div
+      class="absolute inset-0 bg-gradient-to-br from-primary/10 via-base-100 to-secondary/10 animate-gradient-shift z-[-1]"
+    ></div> -->
+    <!-- 渐变背景 -->
+    <div
+      class="fixed inset-0 bg-gradient-to-br from-primary/5 via-base-100 to-secondary/5 -z-10"
+    ></div>
+
+    <!-- 装饰元素 -->
+    <div class="fixed top-10 right-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl -z-10"></div>
+    <div
+      class="fixed bottom-10 left-10 w-96 h-96 bg-secondary/10 rounded-full blur-3xl -z-10"
+    ></div>
+
     <div class="m-auto shadow-md border border-base-300 p-6 rounded-md min-w-xl">
       <h2 class="font-semibold text-xl">选择适合您的方案</h2>
       <Form ref="formRef" :form="form" :schema="schema" label-width="60px">
