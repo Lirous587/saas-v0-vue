@@ -1,5 +1,5 @@
 <template>
-  <div class="!scroll-smooth">
+  <div>
     <!-- Navbar -->
     <div
       class="navbar bg-base-100/80 backdrop-blur-md border-b border-base-300 sticky top-0 z-50 shadow-sm px-4"
@@ -21,20 +21,20 @@
         </ul>
       </div>
       <div class="navbar-end gap-2">
-        <router-link to="/login" class="btn btn-sm rounded-full btn-dash"> 登录 </router-link>
+        <RouterLink to="/login" class="btn btn-sm rounded-full btn-dash"> 登录 </RouterLink>
 
-        <router-link
+        <RouterLink
           to="/register"
           class="btn btn-sm btn-primary opacity-80 rounded-full shadow-lg hover:shadow-xl transition-shadow"
         >
           免费注册
-        </router-link>
+        </RouterLink>
       </div>
     </div>
 
     <!-- Hero Section -->
     <MotionFadeInUp
-      class="relative h-screen border-b border-b-base-300 flex flex-col items-center justify-center text-center space-y-6"
+      class="relative min-h-screen border-b border-b-base-300 flex flex-col items-center justify-center text-center space-y-4 p-12"
     >
       <!-- 装饰性背景 -->
       <div class="absolute inset-0 opacity-10">
@@ -47,20 +47,20 @@
         <SparklesIcon class="h-5 w-5" />
       </div>
       <h1
-        class="text-7xl font-extrabold leading-tight bg-conic from-primary via-info to-secondary bg-clip-text text-transparent"
+        class="text-7xl font-extrabold leading-tight bg-gradient-to-r from-primary/80 to-secondary/80 bg-clip-text text-transparent"
       >
         <span> 为您的网站 </span>
         <br />
         <span>添加评论功能</span>
       </h1>
 
-      <h2 class="font-semibold my-4">
+      <h2 class="font-semibold">
         <span class="text-primary text-2xl"> 无需后端开发 </span>
         <br />
         <span class="text-info"> 即可为静态博客、个人主页添加完整的评论系统 </span>
       </h2>
 
-      <div class="flex justify-center mb-6 gap-x-3">
+      <div class="flex justify-center gap-x-3">
         <button class="btn btn-primary btn-lg shadow-lg hover:shadow-xl transition hover:scale-105">
           <BoltIcon class="w-5 h-5" />
           立即开始
@@ -80,12 +80,12 @@
         </div>
         <div class="stat place-items-center">
           <div class="stat-title text-base-content/60">网站接入</div>
-          <div class="stat-value text-secondary text-4xl">500+</div>
+          <div class="stat-value text-primary/80 text-4xl">500+</div>
           <div class="stat-desc text-base-content/50">全球信赖</div>
         </div>
         <div class="stat place-items-center">
           <div class="stat-title text-base-content/60">服务可用性</div>
-          <div class="stat-value text-accent text-4xl">99.9%</div>
+          <div class="stat-value text-primary/70 text-4xl">99.9%</div>
           <div class="stat-desc text-base-content/50">稳定运行</div>
         </div>
       </div>
@@ -93,7 +93,7 @@
 
     <!-- How It Works -->
     <MotionFadeInUp
-      class="relative h-screen border-b border-b-base-300 flex flex-col items-center justify-center text-center space-y-6"
+      class="relative min-h-screen border-b border-b-base-300 flex flex-col items-center justify-center text-center space-y-4 p-12"
     >
       <div class="space-y-4 font-bold">
         <div class="badge badge-secondary badge-lg">
@@ -104,7 +104,7 @@
         <p class="text-xl text-secondary/60">快速接入评论系统，提升网站互动性</p>
       </div>
 
-      <ul class="steps steps-horizontal w-full mb-8">
+      <ul class="steps steps-horizontal w-full">
         <li class="step step-primary">
           <div class="text-center">
             <div class="flex items-center gap-3 mb-2">
@@ -164,7 +164,7 @@
       class="relative min-h-screen border-b border-b-base-300 p-12 grid grid-cols-2 items-center scroll-m-20"
     >
       <!-- Features Section -->
-      <div class="space-y-3 flex flex-col">
+      <div class="space-y-4 flex flex-col">
         <div class="text-center space-y-4 font-bold">
           <div class="badge badge-primary opacity-85 badge-lg">
             核心优势
@@ -181,7 +181,7 @@
       </div>
 
       <!-- Use Cases -->
-      <div class="space-y-3 flex flex-col">
+      <div class="space-y-4 flex flex-col">
         <div class="text-center space-y-4 font-bold">
           <div class="badge badge-secondary badge-lg">
             应用场景
@@ -201,7 +201,7 @@
     <!-- Pricing Section -->
     <MotionFadeInUp
       id="price"
-      class="relative min-h-screen p-12 border-b border-b-base-300 flex flex-col items-center justify-center text-center z-10 space-y-6 scroll-m-20"
+      class="relative min-min-h-screen p-12 border-b border-b-base-300 flex flex-col items-center justify-center text-center z-10 space-y-6 scroll-m-20"
     >
       <div class="text-center space-y-4 font-bold mb-10">
         <div class="badge badge-primary opacity-95 badge-lg">
@@ -298,7 +298,7 @@
 
     <!-- FAQ -->
     <MotionFadeInUp
-      class="relative min-h-screen p-12 border-b border-b-base-300 flex flex-col items-center justify-center text-center z-10 space-y-6"
+      class="relative min-min-h-screen p-12 border-b border-b-base-300 flex flex-col items-center justify-center text-center z-10 space-y-6"
     >
       <div class="text-center mb-12 font-bold">
         <div class="badge badge-neutral badge-lg mb-4">FAQ</div>
