@@ -37,7 +37,7 @@ const stateQueryParam = computed(() => route.query.state as string | undefined)
 
 const togoLoginIndex = () => {
   router.push({
-    name: '/home',
+    name: '/auth-redirect',
   })
 }
 
@@ -49,7 +49,7 @@ const handleGithubLogin = async () => {
   }
 
   let decodedState: { csrf?: string; redirect?: string } = {}
-  let finalRedirectPath = '/home' // 默认重定向路径
+  let finalRedirectPath = '/auth-redirect' // 默认重定向路径
 
   if (stateQueryParam.value) {
     decodedState = JSON.parse(decodeURIComponent(stateQueryParam.value))

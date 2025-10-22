@@ -7,7 +7,7 @@ export interface NavItem {
 }
 
 export const useMyNavStore = defineStore('myNavsStore', () => {
-  const navs = ref<NavItem[]>([{ path: '/home', title: '主页' }])
+  const navs = ref<NavItem[]>([{ path: '/auth-redirect', title: '主页' }])
 
   const navsKey = 'navs'
 

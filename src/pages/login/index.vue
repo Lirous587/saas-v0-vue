@@ -8,7 +8,7 @@
       </div>
     </header>
     <main class="flex-1 flex flex-col justify-center items-center gap-y-6 px-5">
-      <h2 class="text-xl font-bold font-mono">Log in to Li-Admin</h2>
+      <h2 class="text-xl font-bold font-mono">Log in to Li-SaaS</h2>
 
       <a
         :href="githubAuthUrl"
@@ -17,6 +17,21 @@
         <IconGithub />
         使用GitHub登录
       </a>
+
+      <!-- <RouterLink
+        to="/login/email"
+        class="btn btn-secondary btn-outline w-[320px] flex items-center justify-center"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+          />
+        </svg>
+        使用邮箱登录
+      </RouterLink> -->
 
       <div class="w-[320px] h-[1px] bg-base-300 my-2"></div>
     </main>

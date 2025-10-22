@@ -28,12 +28,24 @@ export function throttle<T extends (...args: any[]) => any>(
 export function debounce<T extends (...args: any[]) => any>(
   fn: T,
   delay: number = 200
-): (...args: Parameters<T>) => void {
+): (...args: Parameters<T>) => ReturnType<T> {
   let timer: number | null = null
-  return function (this: any, ...args: Parameters<T>) {
+  return function (this: any, ...args: Parameters<T>): ReturnType<T> {
     if (timer) clearTimeout(timer)
-    timer = setTimeout(() => {
-      fn.apply(this, args)
-    }, delay)
+    return new Promise((resolve, reject) => {
+      timer = window.setTimeout(() => {
+        try {
+          const result = fn.apply(this, args)
+          // 如果结果是 Promise，直接返回
+          if (result instanceof Promise) {
+            result.then(resolve).catch(reject)
+          } else {
+            resolve(result)
+          }
+        } catch (error) {
+          reject(error)
+        }
+      }, delay)
+    }) as ReturnType<T>
   }
 }

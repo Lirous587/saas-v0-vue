@@ -20,12 +20,14 @@ declare module 'vue-router/auto-routes' {
   export interface RouteNamedMap {
     '/': RouteRecordInfo<'/', '/', Record<never, never>, Record<never, never>>,
     '/404': RouteRecordInfo<'/404', '/404', Record<never, never>, Record<never, never>>,
-    '/home': RouteRecordInfo<'/home', '/home', Record<never, never>, Record<never, never>>,
+    '/auth-redirect': RouteRecordInfo<'/auth-redirect', '/auth-redirect', Record<never, never>, Record<never, never>>,
     '/img/': RouteRecordInfo<'/img/', '/img', Record<never, never>, Record<never, never>>,
     '/img/recycle': RouteRecordInfo<'/img/recycle', '/img/recycle', Record<never, never>, Record<never, never>>,
     '/login/': RouteRecordInfo<'/login/', '/login', Record<never, never>, Record<never, never>>,
     '/login/github': RouteRecordInfo<'/login/github', '/login/github', Record<never, never>, Record<never, never>>,
     '/register/': RouteRecordInfo<'/register/', '/register', Record<never, never>, Record<never, never>>,
+    '/tenant/[id]': RouteRecordInfo<'/tenant/[id]', '/tenant/:id', { id: ParamValue<true> }, { id: ParamValue<false> }>,
+    '/tenant/register': RouteRecordInfo<'/tenant/register', '/tenant/register', Record<never, never>, Record<never, never>>,
   }
 
   /**
@@ -47,8 +49,8 @@ declare module 'vue-router/auto-routes' {
       routes: '/404'
       views: never
     }
-    'src/pages/home.vue': {
-      routes: '/home'
+    'src/pages/auth-redirect.vue': {
+      routes: '/auth-redirect'
       views: never
     }
     'src/pages/img/index.vue': {
@@ -69,6 +71,14 @@ declare module 'vue-router/auto-routes' {
     }
     'src/pages/register/index.vue': {
       routes: '/register/'
+      views: never
+    }
+    'src/pages/tenant/[id].vue': {
+      routes: '/tenant/[id]'
+      views: never
+    }
+    'src/pages/tenant/register.vue': {
+      routes: '/tenant/register'
       views: never
     }
   }

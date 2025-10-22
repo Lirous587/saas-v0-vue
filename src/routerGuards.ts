@@ -7,7 +7,7 @@ import { ValidateAuth } from './api/user'
 
 // 从路由对象中提取 name 的类型
 type RouteName = RouteLocationNormalized['name']
-const loginRoutes: RouteName[] = ['/login/', '/login/github']
+const loginRoutes: RouteName[] = ['/login/', '/login/github', '/login/email']
 const publicRoutes: RouteName[] = [...loginRoutes, '/', '/404']
 
 NProgress.configure({ showSpinner: false })
@@ -37,7 +37,7 @@ export function setupRouterGuards(router: Router) {
         await ValidateAuth()
         if (loginRoutes.includes(to.name)) {
           next({
-            name: '/home',
+            name: '/auth-redirect',
           })
         } else {
           next()
