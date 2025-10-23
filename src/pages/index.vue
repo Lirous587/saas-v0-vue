@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="relative overflow-hidden">
     <!-- Navbar -->
     <div
       class="navbar bg-base-100/80 backdrop-blur-md border-b border-base-300 sticky top-0 z-50 shadow-sm px-4"
@@ -36,12 +36,6 @@
     <MotionFadeInUp
       class="relative min-h-screen border-b border-b-base-300 flex flex-col items-center justify-center text-center space-y-4 p-12"
     >
-      <!-- 装饰性背景 -->
-      <div class="absolute inset-0 opacity-10">
-        <div class="absolute top-20 left-10 w-72 h-72 bg-primary rounded-full blur-3xl"></div>
-        <div class="absolute bottom-20 right-10 w-96 h-96 bg-secondary rounded-full blur-3xl"></div>
-      </div>
-
       <div class="badge badge-primary badge-lg">
         轻松接入，即刻使用
         <SparklesIcon class="h-5 w-5" />
@@ -306,7 +300,7 @@
         <p class="text-xl text-neutral/40">快速了解更多信息</p>
       </div>
 
-      <div class="join join-vertical bg-base-100 *:text-start">
+      <div class="join join-vertical bg-base-100 *:text-start rounded-md shadow-md">
         <div class="collapse collapse-plus bg-base-100 join-item border border-base-300">
           <input type="radio" name="faq-accordion" checked />
           <div class="collapse-title text-xl font-semibold flex items-center gap-3">
