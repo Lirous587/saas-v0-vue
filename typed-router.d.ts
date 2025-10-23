@@ -25,7 +25,6 @@ declare module 'vue-router/auto-routes' {
     '/img/recycle': RouteRecordInfo<'/img/recycle', '/img/recycle', Record<never, never>, Record<never, never>>,
     '/login/': RouteRecordInfo<'/login/', '/login', Record<never, never>, Record<never, never>>,
     '/login/github': RouteRecordInfo<'/login/github', '/login/github', Record<never, never>, Record<never, never>>,
-    '/register/': RouteRecordInfo<'/register/', '/register', Record<never, never>, Record<never, never>>,
     '/tenant/[id]': RouteRecordInfo<'/tenant/[id]', '/tenant/:id', { id: ParamValue<true> }, { id: ParamValue<false> }>,
     '/tenant/register': RouteRecordInfo<'/tenant/register', '/tenant/register', Record<never, never>, Record<never, never>>,
   }
@@ -67,10 +66,6 @@ declare module 'vue-router/auto-routes' {
     }
     'src/pages/login/github.vue': {
       routes: '/login/github'
-      views: never
-    }
-    'src/pages/register/index.vue': {
-      routes: '/register/'
       views: never
     }
     'src/pages/tenant/[id].vue': {

@@ -2,7 +2,7 @@
 import { reactive, ref } from 'vue'
 import { CheckTenantName, CreateTenant, type CreateTenantRequest } from '@/api/tenant'
 import { Form, FormItem, TextInput, Textarea, type FormRef, useYup } from 'li-daisy'
-import { CheckBadgeIcon, ExclamationCircleIcon } from '@heroicons/vue/24/outline'
+import { CheckBadgeIcon, ExclamationTriangleIcon } from '@heroicons/vue/24/outline'
 import { debounce } from '@/utils'
 import { router } from '@/main'
 
@@ -59,10 +59,11 @@ const debouncedCheckTenantName = debounce((value: string): Promise<void> => {
 }, 500)
 
 const handleSubmit = async () => {
-  await formRef.value?.validate().then(() => {
-    CreateTenant(form)
-  })
-  router.push('/auth-redirect')
+  if (formRef.value.isValid) {
+    CreateTenant(form).then(() => {
+      router.push('/auth-redirect')
+    })
+  }
 }
 </script>
 
@@ -76,7 +77,7 @@ const handleSubmit = async () => {
             <template #suffix>
               <div v-if="nameValidLoading" class="loading loading-xs"></div>
               <CheckBadgeIcon v-else-if="nameValid" class="w-5 h-5 text-success" />
-              <ExclamationCircleIcon v-else class="w-5 h-5 text-error" />
+              <ExclamationTriangleIcon v-else class="w-5 h-5 text-error" />
             </template>
           </TextInput>
         </FormItem>
@@ -87,7 +88,7 @@ const handleSubmit = async () => {
             placeholder="租户描述(可选)"
           ></Textarea>
         </FormItem>
-        <FormItem label="计划" name="plan" align="horizontal">
+        <FormItem label="选择计划" name="plan">
           <select v-model="form.plan_id" class="select select-sm w-full">
             <option :value="1">🎉 Free - 免费版</option>
             <option :value="2">⭐ Pro - 专业版</option>
@@ -95,7 +96,12 @@ const handleSubmit = async () => {
           </select>
         </FormItem>
         <FormItem>
-          <button type="button" class="btn btn-neutral w-full" @click="handleSubmit">
+          <button
+            :disabled="!formRef?.isValid"
+            type="button"
+            class="btn btn-neutral w-full"
+            @click="handleSubmit"
+          >
             创建租户
           </button>
         </FormItem>

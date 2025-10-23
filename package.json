@@ -21,7 +21,7 @@
     "axios-auth-refresh": "^3.3.6",
     "cropperjs": "^1.6.2",
     "daisyui": "^5.3.7",
-    "li-daisy": "^2.6.0",
+    "li-daisy": "^2.6.4",
     "md-editor-v3": "^5.8.4",
     "motion-v": "^1.7.3",
     "nprogress": "^0.2.0",
