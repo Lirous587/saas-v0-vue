@@ -8,6 +8,11 @@ import { getAccessToken } from '@/utils/auth'
 import { Notification } from 'li-daisy'
 import { refreshAccessToken } from '@/composable/useTokenRefresh'
 
+// 扩展axios的config 允许传入自定义上下文
+type RequestConfig = InternalAxiosRequestConfig & {
+  my_silent?: boolean
+}
+
 const instance = axios.create({
   // baseURL: '/api',
   timeout: 10 * 1000,
@@ -79,6 +84,8 @@ instance.interceptors.response.use(
     return response
   },
   async function (error: AxiosError): Promise<ErrorResponse> {
+    const cfg = error.config as RequestConfig | undefined
+
     // 处理 token 过期的错误
     if (isTokenExpired(error)) {
       error.response!.status = tokenExpiredStatusCode
@@ -113,10 +120,12 @@ instance.interceptors.response.use(
       errorResponse.message = error.message
     }
 
-    // Notification.error({
-    //   title: '请求失败',
-    //   message: errorResponse.message,
-    // })
+    if (!cfg?.my_silent) {
+      Notification.error({
+        title: '请求失败',
+        message: errorResponse.message,
+      })
+    }
 
     return Promise.reject(errorResponse)
   }

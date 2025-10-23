@@ -47,6 +47,7 @@ export const CheckTenantName = (name: string) => {
     params: {
       name: name,
     },
+    my_silent: true,
   })
 }
 
