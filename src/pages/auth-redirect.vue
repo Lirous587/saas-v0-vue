@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { tenantCheck } from '@/composable/useTenantChekc'
+import { tenantCheck } from '@/composable/useTenantCheck'
 
 tenantCheck()
 </script>

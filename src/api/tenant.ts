@@ -5,7 +5,6 @@ export interface Tenant {
   description: string
   id: number
   name: string
-  // price: number
   updated_at: number
 }
 
@@ -28,13 +27,11 @@ export const UpdateTenant = (req: UpdateTenantRequest) => {
   return request.put<Tenant>('/v1/tenant', req)
 }
 
-export interface GetTenantListQuery {
+export interface GetTenantsQuery {
   keyword?: string
-  last_id: number
-  page_size: number
 }
 
-export const GetTenantList = (query: GetTenantListQuery) => {
+export const GetTenants = (query?: GetTenantsQuery) => {
   return request.get<Tenant[]>('/v1/tenant', {
     params: {
       ...query,
