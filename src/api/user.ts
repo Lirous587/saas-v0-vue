@@ -32,7 +32,7 @@ export const RefreshToken = (refreshToken: string) => {
 //#endregion
 
 //#region 用户信息
-interface User {
+export interface User {
   avatar_url: string
   created_at: number
   email: string
@@ -42,7 +42,7 @@ interface User {
   updated_at: number
   username: string
 }
-export const GetProfile = () => {
+export const GetUserProfile = () => {
   return request.get<User>(`/v1/user/profile`)
 }
 //#endregion

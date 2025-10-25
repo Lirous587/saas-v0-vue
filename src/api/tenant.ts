@@ -29,10 +29,21 @@ export const UpdateTenant = (req: UpdateTenantRequest) => {
 
 export interface GetTenantsQuery {
   keyword?: string
+  prev_cursor?: string
+  next_cursor?: string
+  page_size?: string
+}
+
+interface TenantPage {
+  has_next: boolean
+  has_prev: boolean
+  items: Tenant[]
+  next_cursor: string
+  prev_cursor: string
 }
 
 export const GetTenants = (query?: GetTenantsQuery) => {
-  return request.get<Tenant[]>('/v1/tenant', {
+  return request.get<TenantPage>('/v1/tenant', {
     params: {
       ...query,
     },
