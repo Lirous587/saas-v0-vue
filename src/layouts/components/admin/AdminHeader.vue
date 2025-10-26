@@ -5,7 +5,7 @@
     <div class="navbar-end px-3">
       <Popover position="bottom-end" trigger="click" :z-index="100">
         <template #trigger>
-          <div class="avatar">
+          <div class="avatar cursor-pointer">
             <div class="ring-primary ring-offset-base-100 w-8 rounded-full">
               <img :src="useProfile?.avatar_url" />
             </div>
@@ -44,27 +44,20 @@
             <div class="border border-base-300 w-[calc(100%+20px)] -ml-2.5 my-2"></div>
 
             <!-- 主题设置 -->
-            <div
-              to="/"
-              class="px-1.5 py-1.5 rounded-md hover:bg-base-300 transition flex items-center justify-between"
-            >
-              <span class="text-base-content/75 hover:text-base-content">主题</span>
-
-              <div class="flex gap-x-0.5 rounded-full">
-                <ComputerDesktopIcon class="w-4 h-4 text-base-content/80 hover:text-neutral" />
-                <SunIcon class="w-4 h-4 text-base-content/80 hover:text-neutral" />
-                <MoonIcon class="w-4 h-4 text-base-content/80 hover:text-neutral" />
+            <HeaderTheme />
+            <!-- <div class="flex items-center justify-between px-1.5 py-1.5">
+              <span class="text-base-content/75">主题</span>
+              <div class="rounded-full border-2 border-base-300">
+                <button class="btn btn-ghost btn-xs !btn-circle">
+                  <ComputerDesktopIcon class="w-4 h-4 text-base-content/80" />
+                </button>
+                <button class="btn btn-ghost btn-xs !btn-circle">
+                  <SunIcon class="w-4 h-4 text-base-content/80" />
+                </button>
+                <button class="btn btn-ghost btn-xs !btn-circle">
+                  <MoonIcon class="w-4 h-4 text-base-content/80" />
+                </button>
               </div>
-            </div>
-
-            <!-- <div
-              class="px-1.5 py-1.5 rounded-md text-base-content/75 hover:bg-base-300 hover:text-base-content transition"
-            >
-              <label class="flex cursor-pointer gap-2 items-center">
-                <MoonIcon class="w-4 h-4" />
-                <input type="checkbox" value="li-dark" class="toggle theme-controller" />
-                <SunIcon class="w-4 h-4" />
-              </label>
             </div> -->
 
             <div class="border border-base-300 w-[calc(100%+20px)] -ml-2.5 my-2"></div>
@@ -98,34 +91,17 @@
 </template>
 
 <script setup lang="ts">
+import HeaderTheme from './header/HeaderTheme.vue'
 import type { User } from '@/api/user'
-import { useMyThemeStore } from '@/stores/thme'
+import { Popover } from 'li-daisy'
 import { useMyUserStore } from '@/stores/user'
-import { type ThemeSwitchRef, Popover } from 'li-daisy'
-import {
-  ArrowRightEndOnRectangleIcon,
-  HomeIcon,
-  ComputerDesktopIcon,
-  SunIcon,
-  MoonIcon,
-} from '@heroicons/vue/24/outline'
-import { onMounted, ref } from 'vue'
-
-const themeStore = useMyThemeStore()
-const themeSwitchRef = ref<ThemeSwitchRef>()
-
-const handleThemeToggle = (mode: 'light' | 'dark') => {
-  themeStore.toggleTheme(mode)
-}
+import { ArrowRightEndOnRectangleIcon, HomeIcon } from '@heroicons/vue/24/outline'
+import { ref } from 'vue'
 
 const userStore = useMyUserStore()
 
 const useProfile = ref<User>()
 userStore.GetProfile().then(res => {
   useProfile.value = res
-})
-
-onMounted(() => {
-  themeStore.toggleTheme(themeSwitchRef.value?.isDark ? 'dark' : 'light')
 })
 </script>
