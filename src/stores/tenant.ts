@@ -1,24 +1,26 @@
-import { GetTenants, type Tenant } from '@/api/tenant'
+import { GetTenantPlan, type TenantPlan } from '@/api/tenant'
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
+import { useRoute } from 'vue-router'
 
 export const useMyTenantStore = defineStore('myTenantStore', () => {
-  const tenants = ref<Tenant[]>([])
+  const route = useRoute()
 
-  const GetTenantList = async () => {
-    if (tenants.value.length === 0) {
-      await GetTenants().then(res => {
-        if (res.data?.items.length > 0) {
-          tenants.value = res.data.items
-        }
+  const tenantPlan = ref<TenantPlan>()
+
+  const getTenantPlan = async (): Promise<TenantPlan> => {
+    if (!tenantPlan.value) {
+      const id = (route.params as { id?: number }).id || 0
+      await GetTenantPlan(id).then(res => {
+        tenantPlan.value = res.data
       })
     }
 
-    return tenants.value
+    return tenantPlan.value
   }
 
   return {
-    tenants,
-    GetTenantList,
+    tenantPlan,
+    getTenantPlan,
   }
 })

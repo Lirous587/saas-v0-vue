@@ -1,30 +1,39 @@
 import request from '@/request'
 
 export interface Tenant {
+  id: number
   created_at: number
   description: string
-  id: number
   name: string
   updated_at: number
 }
 
+type billingCycle = 'monthly' | 'yearly' | 'lifetime'
+type planType = 'free' | 'caring' | 'professional'
+
 export interface CreateTenantRequest {
   name: string
   description: string
-  plan_id: number
+  billing_cycle: billingCycle
+  plan_type: planType
 }
 
 export const CreateTenant = (req: CreateTenantRequest) => {
-  return request.post<Tenant>('/v1/tenant', req)
+  return request.post('/v1/tenant', req)
 }
 
-interface UpdateTenantRequest {
+export const ReadTenant = (id: number) => {
+  return request.get<Tenant>(`/v1/tenant/${id}`, {
+    my_silent: true,
+  })
+}
+
+export interface UpdateTenantRequest {
   description: string
-  id: string
 }
 
-export const UpdateTenant = (req: UpdateTenantRequest) => {
-  return request.put<Tenant>('/v1/tenant', req)
+export const UpdateTenant = (id: number, req: UpdateTenantRequest) => {
+  return request.put<Tenant>(`/v1/tenant/${id}`, req)
 }
 
 export interface GetTenantsQuery {
@@ -57,6 +66,20 @@ export const CheckTenantName = (name: string) => {
     },
     my_silent: true,
   })
+}
+
+export interface TenantPlan {
+  billing_cycle: string
+  can_upgrade: boolean
+  end_time: number
+  plan_type: string
+  start_time: number
+  status: string
+  tenant_id: number
+}
+
+export const GetTenantPlan = (id: number) => {
+  return request.get<TenantPlan>(`/v1/tenant/${id}/plan`)
 }
 
 // todo

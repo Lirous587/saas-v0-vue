@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ComputerDesktopIcon, SunIcon, MoonIcon } from '@heroicons/vue/24/outline'
-import { useMyThemeStore } from '@/stores/thme'
+import { useMyThemeStore } from '@/stores/theme'
 
 const themeStore = useMyThemeStore()
 </script>

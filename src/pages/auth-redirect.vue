@@ -1,7 +1,15 @@
 <script setup lang="ts">
-import { tenantCheck } from '@/composable/useTenantCheck'
+import { tenantCheck } from '@/composable/useTenantHandler'
+import { onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 
-tenantCheck()
+const router = useRouter()
+
+onMounted(() => {
+  setTimeout(() => {
+    tenantCheck(router)
+  }, 1000)
+})
 </script>
 
 <!-- 获取该用户所拥有的租户 -->

@@ -9,12 +9,12 @@ import { reactive } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
 import { BookOpenIcon } from '@heroicons/vue/24/outline'
-import { tenantCheck } from '@/composable/useTenantCheck'
+// import { tenantCheck } from '@/composable/useTenantHandler'
 
 const router = useRouter()
 const route = useRoute()
 
-tenantCheck()
+// tenantCheck()
 </script>
 
 <template>
