@@ -17,13 +17,11 @@ export const tenantCheck = async (router: Router) => {
   })
 }
 
-export const getTenant = async (): Promise<Tenant> => {
+export const getTenant = async (id: number): Promise<Tenant> => {
   const router = useRouter()
-  const route = useRoute()
 
   let nowTenant: Tenant
 
-  const id = (route.params as { id?: number }).id || 0
   await ReadTenant(id)
     .then(res => {
       nowTenant = res.data

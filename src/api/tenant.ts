@@ -1,15 +1,18 @@
 import request from '@/request'
 
+type planType = 'free' | 'care' | 'pro'
+
 export interface Tenant {
   id: number
-  created_at: number
-  description: string
   name: string
+  creator_id: 0
+  plan_type: planType
+  description: string
+  created_at: number
   updated_at: number
 }
 
 type billingCycle = 'monthly' | 'yearly' | 'lifetime'
-type planType = 'free' | 'caring' | 'professional'
 
 export interface CreateTenantRequest {
   name: string
@@ -40,10 +43,10 @@ export interface GetTenantsQuery {
   keyword?: string
   prev_cursor?: string
   next_cursor?: string
-  page_size?: string
+  page_size: number
 }
 
-interface TenantPage {
+export interface TenantPage {
   has_next: boolean
   has_prev: boolean
   items: Tenant[]

@@ -5,6 +5,12 @@
     />
 
     <div class="flex-1 mt-[52px] bg-base-200">
+      <main class="shrink-0 p-5 overflow-auto duration-200">
+        <RouterView class="p-4" />
+      </main>
+    </div>
+
+    <!-- <div class="flex-1 mt-[52px] bg-base-200">
       <AdmintAside
         class="fixed top-[52px] bottom-0 overflow-y-auto overflow-x-hidden transition-[width] duration-200 border-r border-r-base-300"
       />
@@ -14,7 +20,7 @@
       >
         <RouterView class="p-4" />
       </main>
-    </div>
+    </div> -->
   </div>
 </template>
 

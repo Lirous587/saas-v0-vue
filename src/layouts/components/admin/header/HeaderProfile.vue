@@ -42,7 +42,7 @@ function handleAvatarError() {
             <template #content>
               <div class="avatar cursor-pointer">
                 <div class="ring-primary ring-offset-base-100 w-8 rounded-full">
-                  <img :src="useProfile?.avatar_url" />
+                  <img :src="useProfile.avatar_url" />
                 </div>
               </div>
             </template>

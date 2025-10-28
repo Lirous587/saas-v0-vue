@@ -1,10 +1,16 @@
 <script setup lang="ts">
-import { type GetTenantsQuery, type Tenant, type TenantPlan } from '@/api/tenant'
+import { GetTenants, type GetTenantsQuery, type TenantPage } from '@/api/tenant'
 import IconChevronUpDown from '@/components/Icon/IconChevronUpDown.vue'
-import { getTenant, getTenatPlan } from '@/composable/useTenantHandler'
-import { reactive, ref } from 'vue'
+import { computed, reactive, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-
+import { Popover, TextInput, Skeleton } from 'li-daisy'
+import {
+  MagnifyingGlassIcon,
+  PlusCircleIcon,
+  CheckIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+} from '@heroicons/vue/24/outline'
 const route = useRoute()
 const router = useRouter()
 
@@ -12,14 +18,107 @@ const form = reactive<GetTenantsQuery>({
   keyword: '',
   prev_cursor: '',
   next_cursor: '',
-  page_size: '',
+  page_size: 5,
 })
 
-const handleChangeTenant = () => {}
+const id = computed(() => {
+  return (route.params as { id?: number }).id | 0
+})
+
+const tenantPage = ref<TenantPage>()
+const loading = ref(false)
+const getTenantsHandler = async () => {
+  loading.value = true
+  await GetTenants(form)
+    .then(res => {
+      tenantPage.value = res.data
+    })
+    .finally(() => {
+      loading.value = false
+    })
+}
+
+const handleChangeTenant = (id: number) => {
+  router.push(`/tenant/${id}`)
+}
+
+const changeCursor = (direction: 'prev' | 'next') => {
+  if (direction === 'prev') {
+    if (!tenantPage.value.has_prev) return
+    form.prev_cursor = tenantPage.value.prev_cursor
+  } else {
+    if (!tenantPage.value.has_next) return
+    form.next_cursor = tenantPage.value.next_cursor
+  }
+
+  getTenantsHandler()
+}
 </script>
 
 <template>
-  <div class="p-1 rounded-md hover:bg-base-300 cursor-pointer">
-    <IconChevronUpDown />
-  </div>
+  <Popover position="right-start" :z-index="100" trigger="click">
+    <template #trigger>
+      <div class="p-1 rounded-md hover:bg-base-300 cursor-pointer" @click="getTenantsHandler">
+        <IconChevronUpDown />
+      </div>
+    </template>
+
+    <template #content>
+      <div class="bg-base-100 rounded-lg border border-base-300 w-60 p-3 overflow-hidden">
+        <form @submit.prevent="getTenantsHandler">
+          <TextInput v-model="form.keyword" placeholder="查找租户" class="mt-3">
+            <template #prefix>
+              <MagnifyingGlassIcon class="w-5 h-5" />
+            </template>
+          </TextInput>
+        </form>
+        <div class="flex items-center justify-between mt-4 mb-1 pl-1">
+          <p class="text-sm text-base-content/60 font-bold">租户列表</p>
+
+          <div class="inline-flex">
+            <ChevronLeftIcon
+              class="w-5 h-5"
+              :class="tenantPage?.has_prev ? 'cursor-pointer' : 'cursor-not-allowed'"
+              @click="changeCursor('prev')"
+            />
+            <ChevronRightIcon
+              class="w-5 h-5"
+              :class="tenantPage?.has_next ? 'cursor-pointer' : 'cursor-not-allowed'"
+              @click="changeCursor('next')"
+            />
+          </div>
+        </div>
+
+        <Skeleton :loading="loading" :count="5" :delay="300">
+          <template #skeleton>
+            <div class="skeleton my-2 w-full h-6 rounded-md"></div>
+          </template>
+          <template #content>
+            <ul>
+              <li
+                v-for="item in tenantPage.items"
+                :key="item.id"
+                class="flex items-center hover:bg-base-300 p-1.5 rounded-md cursor-pointer gap-x-3"
+                @click="handleChangeTenant(item.id)"
+              >
+                <span class="badge badge-primary badge-dash badge-sm">
+                  {{ item.plan_type }}
+                </span>
+                <span class="text-sm text-base-content/75 font-extrabold">
+                  {{ item.name }}
+                </span>
+                <CheckIcon v-if="item.id === id" class="ml-auto w-5 h-5" />
+              </li>
+              <li class="my-2">
+                <RouterLink to="/tenant/register" class="btn btn-primary btn-dash btn-wide btn-sm">
+                  <PlusCircleIcon class="w-5 h-5" />
+                  <b>创建租户</b>
+                </RouterLink>
+              </li>
+            </ul>
+          </template>
+        </Skeleton>
+      </div>
+    </template>
+  </Popover>
 </template>
