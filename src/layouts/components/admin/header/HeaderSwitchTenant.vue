@@ -11,14 +11,15 @@ import {
   ChevronLeftIcon,
   ChevronRightIcon,
 } from '@heroicons/vue/24/outline'
+
 const route = useRoute()
 const router = useRouter()
 
-const form = reactive<GetTenantsQuery>({
+const query = reactive<GetTenantsQuery>({
   keyword: '',
   prev_cursor: '',
   next_cursor: '',
-  page_size: 5,
+  page_size: 8,
 })
 
 const id = computed(() => {
@@ -29,7 +30,7 @@ const tenantPage = ref<TenantPage>()
 const loading = ref(false)
 const getTenantsHandler = async () => {
   loading.value = true
-  await GetTenants(form)
+  await GetTenants(query)
     .then(res => {
       tenantPage.value = res.data
     })
@@ -45,10 +46,12 @@ const handleChangeTenant = (id: number) => {
 const changeCursor = (direction: 'prev' | 'next') => {
   if (direction === 'prev') {
     if (!tenantPage.value.has_prev) return
-    form.prev_cursor = tenantPage.value.prev_cursor
+    query.prev_cursor = tenantPage.value.prev_cursor
+    query.next_cursor = ''
   } else {
     if (!tenantPage.value.has_next) return
-    form.next_cursor = tenantPage.value.next_cursor
+    query.next_cursor = tenantPage.value.next_cursor
+    query.prev_cursor = ''
   }
 
   getTenantsHandler()
@@ -66,7 +69,7 @@ const changeCursor = (direction: 'prev' | 'next') => {
     <template #content>
       <div class="bg-base-100 rounded-lg border border-base-300 w-60 p-3 overflow-hidden">
         <form @submit.prevent="getTenantsHandler">
-          <TextInput v-model="form.keyword" placeholder="查找租户" class="mt-3">
+          <TextInput v-model="query.keyword" placeholder="查找租户" class="mt-3">
             <template #prefix>
               <MagnifyingGlassIcon class="w-5 h-5" />
             </template>
@@ -75,15 +78,19 @@ const changeCursor = (direction: 'prev' | 'next') => {
         <div class="flex items-center justify-between mt-4 mb-1 pl-1">
           <p class="text-sm text-base-content/60 font-bold">租户列表</p>
 
-          <div class="inline-flex">
+          <div v-if="tenantPage?.has_prev || tenantPage?.has_next" class="inline-flex">
             <ChevronLeftIcon
               class="w-5 h-5"
-              :class="tenantPage?.has_prev ? 'cursor-pointer' : 'cursor-not-allowed'"
+              :class="
+                tenantPage?.has_prev ? 'cursor-pointer' : 'cursor-not-allowed text-base-content/40'
+              "
               @click="changeCursor('prev')"
             />
             <ChevronRightIcon
               class="w-5 h-5"
-              :class="tenantPage?.has_next ? 'cursor-pointer' : 'cursor-not-allowed'"
+              :class="
+                tenantPage?.has_next ? 'cursor-pointer' : 'cursor-not-allowed text-base-content/40'
+              "
               @click="changeCursor('next')"
             />
           </div>
