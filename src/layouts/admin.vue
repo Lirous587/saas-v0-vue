@@ -24,7 +24,7 @@ onBeforeUnmount(() => {
       class="w-5 h-5 text-base-content fixed z-10 left-5"
       :style="{
         transform: `scale(${1 - store.scrollProgress * 0.1})`,
-        top: `${22 - store.scrollProgress * 7}px`,
+        top: `${14 + store.scrollProgress * 1}px`,
       }"
     />
 

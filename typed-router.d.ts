@@ -25,7 +25,9 @@ declare module 'vue-router/auto-routes' {
     '/img/recycle': RouteRecordInfo<'/img/recycle', '/img/recycle', Record<never, never>, Record<never, never>>,
     '/login/': RouteRecordInfo<'/login/', '/login', Record<never, never>, Record<never, never>>,
     '/login/github': RouteRecordInfo<'/login/github', '/login/github', Record<never, never>, Record<never, never>>,
-    '/tenant/[id]': RouteRecordInfo<'/tenant/[id]', '/tenant/:id', { id: ParamValue<true> }, { id: ParamValue<false> }>,
+    '/tenant/[id]': RouteRecordInfo<'/tenant/[id]', '/tenant/:id', { id: ParamValue<true> }, { id: ParamValue<false> }, '/tenant/[id]/plate' | '/tenant/[id]/setting'>,
+    '/tenant/[id]/plate': RouteRecordInfo<'/tenant/[id]/plate', '/tenant/:id/plate', { id: ParamValue<true> }, { id: ParamValue<false> }>,
+    '/tenant/[id]/setting': RouteRecordInfo<'/tenant/[id]/setting', '/tenant/:id/setting', { id: ParamValue<true> }, { id: ParamValue<false> }>,
     '/tenant/register': RouteRecordInfo<'/tenant/register', '/tenant/register', Record<never, never>, Record<never, never>>,
   }
 
@@ -69,7 +71,15 @@ declare module 'vue-router/auto-routes' {
       views: never
     }
     'src/pages/tenant/[id].vue': {
-      routes: '/tenant/[id]'
+      routes: '/tenant/[id]' | '/tenant/[id]/plate' | '/tenant/[id]/setting'
+      views: 'default'
+    }
+    'src/pages/tenant/[id]/plate.vue': {
+      routes: '/tenant/[id]/plate'
+      views: never
+    }
+    'src/pages/tenant/[id]/setting.vue': {
+      routes: '/tenant/[id]/setting'
       views: never
     }
     'src/pages/tenant/register.vue': {

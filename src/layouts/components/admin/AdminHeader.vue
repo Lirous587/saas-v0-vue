@@ -1,5 +1,5 @@
 <template>
-  <div class="navbar">
+  <div class="navbar min-h-[48px] py-0">
     <div class="navbar-start *:shrink-0">
       <SlashIcon class="ml-9.5 w-5 h-5 mx-1.5 text-base-content/30" />
       <HeaderTenant />
