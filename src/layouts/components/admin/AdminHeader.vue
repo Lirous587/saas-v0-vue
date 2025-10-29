@@ -1,8 +1,7 @@
 <template>
   <div class="navbar">
     <div class="navbar-start *:shrink-0">
-      <BoltIcon class="w-5 h-5 text-base-content ml-3" />
-      <SlashIcon class="w-5 h-5 mx-1.5 text-base-content/30" />
+      <SlashIcon class="ml-9.5 w-5 h-5 mx-1.5 text-base-content/30" />
       <HeaderTenant />
     </div>
     <div class="navbar-end px-3 space-x-2">
@@ -23,5 +22,5 @@
 import { document_url } from '@/config'
 import HeaderProfile from './header/HeaderProfile.vue'
 import HeaderTenant from './header/HeaderTenant.vue'
-import { BoltIcon, SlashIcon, BookOpenIcon, BellIcon } from '@heroicons/vue/24/outline'
+import { SlashIcon, BookOpenIcon, BellIcon } from '@heroicons/vue/24/outline'
 </script>

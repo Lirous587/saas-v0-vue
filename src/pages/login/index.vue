@@ -49,7 +49,7 @@ definePage({
   },
 })
 import { github_login_config } from '@/config'
-import IconGithub from '@/components/Icon/github.vue'
+import IconGithub from '@/components/Icon/IconGithub.vue'
 import { useRoute } from 'vue-router'
 import { computed } from 'vue'
 
