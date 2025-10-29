@@ -1,6 +1,6 @@
 <template>
   <div class="navbar">
-    <div class="navbar-start">
+    <div class="navbar-start *:shrink-0">
       <BoltIcon class="w-5 h-5 text-base-content ml-3" />
       <SlashIcon class="w-5 h-5 mx-1.5 text-base-content/30" />
       <HeaderTenant />

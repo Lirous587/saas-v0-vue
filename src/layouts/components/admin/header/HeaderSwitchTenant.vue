@@ -28,7 +28,10 @@ const id = computed(() => {
 
 const tenantPage = ref<TenantPage>()
 const loading = ref(false)
+
+const hadLoaded = ref(false)
 const getTenantsHandler = async () => {
+  hadLoaded.value = true
   loading.value = true
   await GetTenants(query)
     .then(res => {
@@ -61,7 +64,10 @@ const changeCursor = (direction: 'prev' | 'next') => {
 <template>
   <Popover position="right-start" :z-index="100" trigger="click">
     <template #trigger>
-      <div class="p-1 rounded-md hover:bg-base-300 cursor-pointer" @click="getTenantsHandler">
+      <div
+        class="p-1 rounded-md hover:bg-base-300 cursor-pointer"
+        @click="!hadLoaded && getTenantsHandler()"
+      >
         <IconChevronUpDown />
       </div>
     </template>

@@ -30,7 +30,7 @@ watch(
 </script>
 
 <template>
-  <div class="flex items-center gap-x-1.5">
+  <div class="flex items-center gap-x-1.5 flex-nowrap text-nowrap">
     <Skeleton :loading="!nowTenant" :delay="2000">
       <template #skeleton>
         <div class="flex gap-x-1.5">
