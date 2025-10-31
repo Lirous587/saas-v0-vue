@@ -107,7 +107,7 @@ const handleContainerLeave = () => {
       v-for="nav in navs"
       :key="nav.path"
       :to="nav.path"
-      class="flex items-center justify-center gap-x-1 transition-colors hover:text-primary px-4 py-2 text-sm font-extrabold select-none relative"
+      class="flex items-center justify-center gap-x-1 transition-colors hover:text-primary px-4 py-2 text-sm font-extrabold select-none relative group"
       :class="route.path.startsWith(nav.path) ? 'text-primary' : ''"
       @mouseenter="handleMouseEnter"
       @mouseleave="handleMouseLeave"
@@ -118,7 +118,7 @@ const handleContainerLeave = () => {
       <!-- 底部指示线（活跃状态） -->
       <div
         v-if="route.path.startsWith(nav.path)"
-        class="absolute left-1 right-1 bottom-0 h-[2px] bg-primary/80 pointer-events-none transition-all"
+        class="absolute left-1 right-1 bottom-0 h-[2px] bg-primary/80 pointer-events-none transition-opacity group-hover:opacity-0"
       ></div>
     </RouterLink>
   </div>
