@@ -1,7 +1,7 @@
 import { GetTenants, ReadTenant, type Tenant, type TenantPlan } from '@/api/tenant'
 import type { ErrorResponse } from '@/request/response'
 import { useMyTenantStore } from '@/stores/tenant'
-import { useRoute, useRouter, type Router } from 'vue-router'
+import { useRouter, type Router } from 'vue-router'
 
 export const tenantCheck = async (router: Router) => {
   let firstTenant: Tenant
@@ -17,7 +17,7 @@ export const tenantCheck = async (router: Router) => {
   })
 }
 
-export const getTenant = async (id: number): Promise<Tenant> => {
+export const getTenant = async (id: string): Promise<Tenant> => {
   const router = useRouter()
 
   let nowTenant: Tenant

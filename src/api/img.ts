@@ -3,24 +3,24 @@ import { refreshAccessToken } from '@/composable/useTokenRefresh'
 
 //#region 图片操作
 export interface Img {
-  id: number
-  description?: string
+  id: string
   url: string
+  description?: string
 }
 
 interface ImgResponse {
-  id: number
-  created_at: number
-  description?: string
+  id: string
   url: string
+  description?: string
+  created_at: number
 }
 
 export interface ImgQuery {
+  category_id?: string
+  keyword: string
+  deleted?: boolean
   page: number
   page_size: number
-  keyword: string
-  category_id?: number
-  deleted?: boolean
 }
 
 export interface ImgList {
@@ -32,8 +32,8 @@ export interface ImgList {
 export interface UploadImgRequest {
   object: Blob
   path?: string
+  category_id?: string
   description?: string
-  category_id?: number
 }
 
 export const UploadImg = async (req: UploadImgRequest) => {
@@ -61,7 +61,7 @@ export const UploadImg = async (req: UploadImgRequest) => {
   })
 }
 
-export const GetImgs = (tenantID: number, query?: ImgQuery) => {
+export const GetImgs = (tenantID: string, query?: ImgQuery) => {
   return request.get<ImgList>(`/v1/img/${tenantID}`, {
     params: {
       ...query,
@@ -70,8 +70,8 @@ export const GetImgs = (tenantID: number, query?: ImgQuery) => {
 }
 
 // 软删除进回收站，硬删除直接删除
-export const DeleteImg = (tenantID: number, id: number, hard = false) => {
-  return request.delete(`/v1/img/${tenantID}/${id}`, {
+export const DeleteImg = (tenantID: string, imgID: string, hard = false) => {
+  return request.delete(`/v1/img/${tenantID}/${imgID}`, {
     params: {
       hard,
     },
@@ -79,13 +79,13 @@ export const DeleteImg = (tenantID: number, id: number, hard = false) => {
 }
 
 // 移除回收站图片
-export const DeleteImgFromRecycle = (tenantID: number, id: number) => {
-  return request.delete(`/v1/img/${tenantID}/recycle/${id}`)
+export const DeleteImgFromRecycle = (tenantID: string, imgID: string) => {
+  return request.delete(`/v1/img/${tenantID}/recycle/${imgID}`)
 }
 
 // 恢复回收站图片
-export const RestoreImgFromRecycle = (tenantID: number, id: number) => {
-  return request.put(`/v1/img/${tenantID}/recycle/${id}`)
+export const RestoreImgFromRecycle = (tenantID: string, imgID: string) => {
+  return request.put(`/v1/img/${tenantID}/recycle/${imgID}`)
 }
 //#endregion
 
@@ -99,7 +99,7 @@ interface SetR2configRequest {
   secret_access_key?: string
 }
 
-export const SetR2config = (tenantID: number, req: SetR2configRequest) => {
+export const SetR2config = (tenantID: st, req: SetR2configRequest) => {
   return request.put(`/v1/img/${tenantID}/r2_config`, req)
 }
 
@@ -111,14 +111,14 @@ interface R2ConfigResponse {
   public_url_prefix: string
 }
 
-export const GetR2Config = (tenantID: number) => {
+export const GetR2Config = (tenantID: string) => {
   return request.get<R2ConfigResponse>(`/v1/img/${tenantID}/r2_config`)
 }
 //#endregion
 
 //#region 图库分类
 export interface ImgCategory {
-  id: number
+  id: string
   prefix: string
   title: string
   created_at: number
@@ -129,8 +129,8 @@ export interface CreateImgCategoryRequset {
   prefix: string
 }
 
-export const CreateImgCategory = (req: CreateImgCategoryRequset) => {
-  return request.post('/v1/img/category', req)
+export const CreateImgCategory = (tenantID: string, req: CreateImgCategoryRequset) => {
+  return request.post(`/v1/img/${tenantID}/category`, req)
 }
 
 export interface UpdateImgCategoryRequest {
@@ -138,14 +138,19 @@ export interface UpdateImgCategoryRequest {
   prefix: string
 }
 
-export const UpdateImgCategory = (id: number, req: UpdateImgCategoryRequest) => {
-  return request.put(`/v1/img/category/${id}`, req)
-}
-export const DeleteImgCategory = (id: number) => {
-  return request.delete(`/v1/img/category/${id}`)
+export const UpdateImgCategory = (
+  tenantID: string,
+  categoryID: string,
+  req: UpdateImgCategoryRequest
+) => {
+  return request.put(`/v1/img/${tenantID}/category/${categoryID}`, req)
 }
 
-export const GetImgCategories = () => {
-  return request.get<ImgCategory[]>(`/v1/img/categories`)
+export const DeleteImgCategory = (tenantID: string, categoryID: string) => {
+  return request.delete(`/v1/img/${tenantID}/category/${categoryID}`)
+}
+
+export const GetImgCategories = (tenantID: string) => {
+  return request.get<ImgCategory[]>(`/v1/img/${tenantID}/categories`)
 }
 //#endregion

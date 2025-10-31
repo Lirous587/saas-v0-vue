@@ -22,7 +22,7 @@ interface navItem {
 
 // 从路由参数获取 id
 const tenantId = computed(() => {
-  return (route.params as { id?: number }).id | 0
+  return (route.params as { id?: string }).id || ''
 })
 
 const navs = computed((): navItem[] => [

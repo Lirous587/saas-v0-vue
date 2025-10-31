@@ -3,20 +3,20 @@ import request from '@/request'
 //#region 评论/回复 点赞/取消 删除
 interface CreateCommentRequest {
   content: string
-  parent_id?: number
-  root_id?: number
+  parent_id?: string
+  root_id?: string
 }
 
-export const CreateComment = (tenantID: number, belongKey: string, req: CreateCommentRequest) => {
+export const CreateComment = (tenantID: string, belongKey: string, req: CreateCommentRequest) => {
   return request.post(`/v1/comment/${tenantID}/${belongKey}`, req)
 }
 
-export const ToggleLike = (tenantID: number, id: number) => {
-  return request.put(`/v1/comment/${tenantID}/like/${id}`)
+export const ToggleLike = (tenantID: string, commentID: string) => {
+  return request.put(`/v1/comment/${tenantID}/like/${commentID}`)
 }
 
-export const DeleteComment = (tenantID: number, id: number) => {
-  return request.delete(`/v1/comment/${tenantID}/${id}`)
+export const DeleteComment = (tenantID: string, commentID: string) => {
+  return request.delete(`/v1/comment/${tenantID}/${commentID}`)
 }
 //#endregion
 
@@ -25,35 +25,35 @@ interface AuditRequest {
   action: 'accept' | 'reject'
 }
 
-export const Audit = (tenantID: number, id: number, req: AuditRequest) => {
-  return request.put(`/v1/comment/${tenantID}/${id}`, req)
+export const Audit = (tenantID: string, commentID: string, req: AuditRequest) => {
+  return request.put(`/v1/comment/${tenantID}/${commentID}`, req)
 }
 //#endregion
 
 //#region 获取roots replies
 interface User {
   avatar: string
-  id: number
+  id: string
   nickname: string
 }
 interface GetGetRootsQuery {
-  last_id: number
+  last_id: string
   page_size: number
 }
 
 interface CommentRoot {
-  content: string
-  created_at: number
-  id: number
-  is_liked: boolean
-  like_count: number
-  parent_id: number
-  replies_count: number
-  root_id: number
+  id: string
+  root_id: string
+  parent_id: string
   user: User
+  is_liked: boolean
+  content: string
+  like_count: number
+  replies_count: number
+  created_at: number
 }
 
-export const GetRoots = (tenantID: number, belongKey: string, query: GetGetRootsQuery) => {
+export const GetRoots = (tenantID: string, belongKey: string, query: GetGetRootsQuery) => {
   return request.get<CommentRoot[]>(`/v1/comment/${tenantID}/${belongKey}/roots`, {
     params: {
       ...query,
@@ -62,14 +62,14 @@ export const GetRoots = (tenantID: number, belongKey: string, query: GetGetRoots
 }
 
 interface GetRepliesQuery {
-  last_id: number
+  last_id: string
   page_size: number
 }
 
 export const GetReplies = (
-  tenantID: number,
+  tenantID: string,
   belongKey: string,
-  rootID: number,
+  rootID: string,
   query: GetRepliesQuery
 ) => {
   return request.get<CommentRoot[]>(`/v1/comment/${tenantID}/${belongKey}/${rootID}/replies`, {
@@ -87,7 +87,7 @@ interface CreateCommentPlateRequest {
   summary: string
 }
 
-export const CreateCommentPlate = (tenantID: number, req: CreateCommentPlateRequest) => {
+export const CreateCommentPlate = (tenantID: string, req: CreateCommentPlateRequest) => {
   return request.post(`/v1/comment/${tenantID}/plate`, req)
 }
 
@@ -98,15 +98,15 @@ interface UpdateCommentPlateRequest {
 }
 
 export const UpdateCommentPlate = (
-  tenantID: number,
-  id: number,
+  tenantID: string,
+  plateID: string,
   req: UpdateCommentPlateRequest
 ) => {
-  return request.put(`/v1/comment/${tenantID}/plate/${id}`, req)
+  return request.put(`/v1/comment/${tenantID}/plate/${plateID}`, req)
 }
 
-export const DeleteCommentPlate = (tenantID: number, id: number) => {
-  return request.delete(`/v1/comment/${tenantID}/plate/${id}`)
+export const DeleteCommentPlate = (tenantID: string, plateID: string) => {
+  return request.delete(`/v1/comment/${tenantID}/plate/${plateID}`)
 }
 
 interface CommentPlateQuery {
@@ -115,7 +115,7 @@ interface CommentPlateQuery {
   summary: string
 }
 
-export const GetCommentPlates = (tenantID: number, query: CommentPlateQuery) => {
+export const GetCommentPlates = (tenantID: string, query: CommentPlateQuery) => {
   return request.get(`/v1/comment/${tenantID}/plate`, {
     params: {
       ...query,
@@ -130,7 +130,7 @@ interface SetPlateConfigRequest {
 }
 
 export const SetPlatetConfig = (
-  tenantID: number,
+  tenantID: string,
   belongKey: string,
   req: SetPlateConfigRequest
 ) => {
@@ -143,8 +143,8 @@ interface PlateConfigResponse {
   updated_at: number
 }
 
-export const GetPlateConfig = (tenantID: number, id: number) => {
-  return request.get<PlateConfigResponse>(`/v1/comment/${tenantID}/plate/config/${id}`)
+export const GetPlateConfig = (tenantID: string, plateID: string) => {
+  return request.get<PlateConfigResponse>(`/v1/comment/${tenantID}/plate/config/${plateID}`)
 }
 //#endregion
 
@@ -153,7 +153,7 @@ interface SetTenantConfigRequest {
   if_audit: boolean
 }
 
-export const SetTenantConfig = (tenantID: number, req: SetTenantConfigRequest) => {
+export const SetTenantConfig = (tenantID: string, req: SetTenantConfigRequest) => {
   return request.put(`/v1/comment/${tenantID}/config`, req)
 }
 
@@ -164,7 +164,7 @@ interface TenantConfigResponse {
   updated_at: number
 }
 
-export const GetTenantConfig = (tenantID: number) => {
+export const GetTenantConfig = (tenantID: string) => {
   return request.get<TenantConfigResponse>(`/v1/comment/${tenantID}/config`)
 }
 //#endregion

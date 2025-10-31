@@ -1,6 +1,16 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
-import { CheckTenantName, CreateTenant, type CreateTenantRequest } from '@/api/tenant'
+import {
+  BillingCycleLifetime,
+  BillingCycleMonthly,
+  BillingCycleYearly,
+  CheckTenantName,
+  CreateTenant,
+  PlanCare,
+  PlanFree,
+  PlanPro,
+  type CreateTenantRequest,
+} from '@/api/tenant'
 import { Form, FormItem, TextInput, Textarea, type FormRef, useYup } from 'li-daisy'
 import { CheckBadgeIcon, ExclamationTriangleIcon } from '@heroicons/vue/24/outline'
 import { debounce } from '@/utils'
@@ -10,8 +20,9 @@ const formRef = ref<FormRef>()
 
 const form = reactive<CreateTenantRequest>({
   name: '',
+  plan_type: 'free',
+  billing_cycle: 'monthly',
   description: '',
-  plan_id: 1,
 })
 
 const yup = useYup()
@@ -35,7 +46,8 @@ const schema = yup.object({
       }
     }),
   description: yup.string().trim().max(120, '描述最多120个字符'),
-  plan_id: yup.number().required('请选择方案'),
+  plan_type: yup.string().required('请选择计划方案'),
+  billing_cycle: yup.string().required('请选择计费方案'),
 })
 
 const nameValid = ref(true)
@@ -81,6 +93,20 @@ const handleSubmit = async () => {
             </template>
           </TextInput>
         </FormItem>
+        <FormItem label="选择计划" name="plan_type">
+          <select v-model="form.plan_type" class="select select-sm w-full">
+            <option :value="PlanFree">Free 免费版</option>
+            <option :value="PlanCare">Care 爱心版</option>
+            <option :value="PlanPro">Pro 专业版</option>
+          </select>
+        </FormItem>
+        <FormItem label="计费周期" name="billing_cycle">
+          <select v-model="form.billing_cycle" class="select select-sm w-full">
+            <option :value="BillingCycleMonthly">月付</option>
+            <option :value="BillingCycleYearly">年付</option>
+            <option :value="BillingCycleLifetime">终身</option>
+          </select>
+        </FormItem>
         <FormItem label="描述" name="description">
           <Textarea
             v-model="form.description"
@@ -88,13 +114,7 @@ const handleSubmit = async () => {
             placeholder="租户描述(可选)"
           ></Textarea>
         </FormItem>
-        <FormItem label="选择计划" name="plan">
-          <select v-model="form.plan_id" class="select select-sm w-full">
-            <option :value="1">🎉 Free - 免费版</option>
-            <option :value="2">⭐ Pro - 专业版</option>
-            <option :value="3">👑 Enterprise - 企业版</option>
-          </select>
-        </FormItem>
+
         <FormItem>
           <button
             :disabled="!formRef?.isValid"

@@ -2,8 +2,12 @@ import request from '@/request'
 
 type planType = 'free' | 'care' | 'pro'
 
+export const PlanFree: planType = 'free'
+export const PlanCare: planType = 'care'
+export const PlanPro: planType = 'pro'
+
 export interface Tenant {
-  id: number
+  id: string
   name: string
   creator_id: 0
   plan_type: planType
@@ -13,6 +17,10 @@ export interface Tenant {
 }
 
 type billingCycle = 'monthly' | 'yearly' | 'lifetime'
+
+export const BillingCycleMonthly: billingCycle = 'monthly'
+export const BillingCycleYearly: billingCycle = 'yearly'
+export const BillingCycleLifetime: billingCycle = 'lifetime'
 
 export interface CreateTenantRequest {
   name: string
@@ -25,7 +33,7 @@ export const CreateTenant = (req: CreateTenantRequest) => {
   return request.post('/v1/tenant', req)
 }
 
-export const ReadTenant = (id: number) => {
+export const ReadTenant = (id: string) => {
   return request.get<Tenant>(`/v1/tenant/${id}`, {
     my_silent: true,
   })
@@ -35,7 +43,7 @@ export interface UpdateTenantRequest {
   description: string
 }
 
-export const UpdateTenant = (id: number, req: UpdateTenantRequest) => {
+export const UpdateTenant = (id: string, req: UpdateTenantRequest) => {
   return request.put<Tenant>(`/v1/tenant/${id}`, req)
 }
 
@@ -72,16 +80,16 @@ export const CheckTenantName = (name: string) => {
 }
 
 export interface TenantPlan {
+  tenant_id: string
   billing_cycle: string
   can_upgrade: boolean
-  end_time: number
   plan_type: string
-  start_time: number
   status: string
-  tenant_id: number
+  start_time: number
+  end_time: number
 }
 
-export const GetTenantPlan = (id: number) => {
+export const GetTenantPlan = (id: string) => {
   return request.get<TenantPlan>(`/v1/tenant/${id}/plan`)
 }
 

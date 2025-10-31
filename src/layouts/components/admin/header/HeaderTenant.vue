@@ -9,7 +9,7 @@ import { useRoute } from 'vue-router'
 const route = useRoute()
 
 const nowTenant = ref<Tenant>()
-const getTenantHandler = (id: number) => {
+const getTenantHandler = (id: string) => {
   nowTenant.value = null
   getTenant(id).then(res => {
     nowTenant.value = res
@@ -17,7 +17,7 @@ const getTenantHandler = (id: number) => {
 }
 
 watch(
-  () => (route.params as { id?: number }).id,
+  () => (route.params as { id?: string }).id,
   (newId, oldId) => {
     if (newId !== oldId) {
       getTenantHandler(newId)

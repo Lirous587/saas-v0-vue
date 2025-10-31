@@ -10,7 +10,7 @@ export const useMyTenantStore = defineStore('myTenantStore', () => {
 
   const getTenantPlan = async (): Promise<TenantPlan> => {
     if (!tenantPlan.value) {
-      const id = (route.params as { id?: number }).id || 0
+      const id = (route.params as { id?: string }).id || ''
       await GetTenantPlan(id).then(res => {
         tenantPlan.value = res.data
       })

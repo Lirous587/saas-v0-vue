@@ -23,7 +23,7 @@ const query = reactive<GetTenantsQuery>({
 })
 
 const id = computed(() => {
-  return (route.params as { id?: number }).id | 0
+  return (route.params as { id?: string }).id || ''
 })
 
 const tenantPage = ref<TenantPage>()
@@ -42,7 +42,7 @@ const getTenantsHandler = async () => {
     })
 }
 
-const handleChangeTenant = (id: number) => {
+const handleChangeTenant = (id: string) => {
   router.push(`/tenant/${id}`)
 }
 

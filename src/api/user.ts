@@ -33,14 +33,14 @@ export const RefreshToken = (refreshToken: string) => {
 
 //#region 用户信息
 export interface User {
+  id: string
+  username: string
   avatar_url: string
-  created_at: number
   email: string
   email_verified: boolean
-  id: number
   last_login_at: number
+  created_at: number
   updated_at: number
-  username: string
 }
 export const GetUserProfile = () => {
   return request.get<User>(`/v1/user/profile`)
