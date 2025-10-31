@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
+import { computed, reactive, ref, watch } from 'vue'
 import {
   BillingCycleLifetime,
   BillingCycleMonthly,
@@ -25,6 +25,24 @@ const form = reactive<CreateTenantRequest>({
   description: '',
 })
 
+// 是否为免费或爱心版
+const isFreePlan = computed(() => [PlanFree, PlanCare].includes(form.plan_type))
+
+// 当plan_type改变时，自动设置billing_cycle
+watch(
+  () => form.plan_type,
+  newPlan => {
+    if ([PlanFree, PlanCare].includes(newPlan)) {
+      form.billing_cycle = BillingCycleLifetime
+    } else {
+      form.billing_cycle = BillingCycleMonthly
+    }
+  },
+  {
+    immediate: true,
+  }
+)
+
 const yup = useYup()
 
 // 自定义验证规则
@@ -47,7 +65,30 @@ const schema = yup.object({
     }),
   description: yup.string().trim().max(120, '描述最多120个字符'),
   plan_type: yup.string().required('请选择计划方案'),
-  billing_cycle: yup.string().required('请选择计费方案'),
+  billing_cycle: yup
+    .string()
+    .required('请选择计费方案')
+    .test('billingCycleValid', '计费方案选择有误', function (value) {
+      const { plan_type } = this.parent
+
+      // 如果是专业版，不能选择终身
+      if (plan_type === PlanPro && value === BillingCycleLifetime) {
+        return this.createError({
+          message: '专业版不支持终身计费',
+        })
+      }
+
+      // 如果是免费或爱心版，必须选择终身
+      if ([PlanFree, PlanCare].includes(plan_type)) {
+        if (value !== BillingCycleLifetime) {
+          return this.createError({
+            message: '免费版/爱心版只能选择终身计费',
+          })
+        }
+      }
+
+      return true
+    }),
 })
 
 const nameValid = ref(true)
@@ -101,10 +142,14 @@ const handleSubmit = async () => {
           </select>
         </FormItem>
         <FormItem label="计费周期" name="billing_cycle">
-          <select v-model="form.billing_cycle" class="select select-sm w-full">
+          <select
+            v-model="form.billing_cycle"
+            class="select select-sm w-full"
+            :disabled="isFreePlan"
+          >
             <option :value="BillingCycleMonthly">月付</option>
             <option :value="BillingCycleYearly">年付</option>
-            <option :value="BillingCycleLifetime">终身</option>
+            <option v-if="isFreePlan" :value="BillingCycleLifetime">终身</option>
           </select>
         </FormItem>
         <FormItem label="描述" name="description">
